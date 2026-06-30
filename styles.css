@@ -1,0 +1,349 @@
+/* ===========================
+   RESET & BASE
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    color: #e8f5e9;
+    /* Dark jungle photo with overlay */
+    background:
+        linear-gradient(rgba(0, 8, 2, 0.62), rgba(0, 8, 2, 0.65)),
+        url('images/jungle-bg.jpg') center / cover fixed;
+}
+
+/* ===========================
+   SPLASH OVERLAY
+=========================== */
+#splash-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.93);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 0.9s ease;
+}
+
+#splash-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#splash-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+}
+
+.splash-emoji {
+    font-size: 5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+}
+
+.splash-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    color: #ffffff;
+    text-shadow: 0 0 30px rgba(102, 255, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.splash-subtitle {
+    font-size: 1.1rem;
+    color: #a5d6a7;
+    font-weight: 600;
+}
+
+#enter-btn {
+    margin-top: 14px;
+    padding: 16px 48px;
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: #ffffff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    box-shadow: 0 0 30px rgba(102, 187, 106, 0.45);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#enter-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 45px rgba(102, 187, 106, 0.65);
+}
+
+/* ===========================
+   HEADER
+=========================== */
+#header {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(102, 255, 0, 0.18);
+    text-align: center;
+    padding: 44px 20px 36px;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+#site-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 25px rgba(102, 255, 0, 0.4);
+}
+
+.subtitle {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #a5d6a7;
+}
+
+#mute-btn {
+    margin-top: 8px;
+    padding: 10px 28px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #c8e6c9;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border: 2px solid rgba(102, 255, 0, 0.35);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+#mute-btn:hover {
+    background: rgba(102, 255, 0, 0.12);
+    border-color: rgba(102, 255, 0, 0.65);
+    transform: scale(1.05);
+}
+
+/* ===========================
+   NOW PLAYING BANNER
+=========================== */
+#now-playing {
+    background: rgba(0, 0, 0, 0.45);
+    border-top: 2px solid rgba(255, 193, 7, 0.3);
+    border-bottom: 2px solid rgba(255, 193, 7, 0.3);
+    text-align: center;
+    padding: 14px 20px;
+    backdrop-filter: blur(6px);
+}
+
+#now-playing-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffc107;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+/* ===========================
+   ANIMALS GRID
+=========================== */
+#animals-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+    padding: 50px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===========================
+   ANIMAL CARD
+=========================== */
+.animal-card {
+    background: rgba(0, 20, 5, 0.78);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(100, 200, 100, 0.18);
+    border-radius: 22px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+
+    /* Start invisible for IntersectionObserver fade-in */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease,
+                border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* IntersectionObserver adds this class when card enters viewport */
+.animal-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover */
+.animal-card:hover {
+    border-color: rgba(102, 255, 0, 0.6);
+    box-shadow: 0 0 22px rgba(102, 255, 0, 0.22),
+                0 10px 32px rgba(0, 0, 0, 0.5);
+    transform: translateY(-6px);
+}
+
+/* Active — currently playing */
+.animal-card.active {
+    border-color: #ffc107;
+    box-shadow: 0 0 0 4px rgba(255, 193, 7, 0.28),
+                0 0 34px rgba(255, 193, 7, 0.35);
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%   { transform: scale(1); }
+    30%  { transform: scale(1.08); }
+    60%  { transform: scale(0.96); }
+    100% { transform: scale(1); }
+}
+
+.animal-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.animal-card:hover .animal-img {
+    transform: scale(1.06);
+}
+
+.card-info {
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.animal-emoji {
+    font-size: 1.8rem;
+}
+
+.animal-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    color: #69f0ae;
+}
+
+.key-badge {
+    background: linear-gradient(135deg, #f9a825, #e65100);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+#footer {
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid rgba(102, 255, 0, 0.15);
+    color: #81c784;
+    text-align: center;
+    padding: 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+/* ===========================
+   RESPONSIVE — MEDIA QUERIES
+=========================== */
+@media (max-width: 1024px) {
+    #animals-grid {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 40px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #site-title {
+        font-size: 2.1rem;
+    }
+
+    #animals-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px 20px;
+        gap: 18px;
+    }
+
+    .splash-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #site-title {
+        font-size: 1.65rem;
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+    }
+
+    #animals-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 12px;
+        gap: 12px;
+    }
+
+    .animal-img {
+        height: 130px;
+    }
+
+    .animal-name {
+        font-size: 1rem;
+    }
+
+    .splash-title {
+        font-size: 2rem;
+    }
+
+    .splash-emoji {
+        font-size: 3.5rem;
+    }
+
+    #enter-btn {
+        font-size: 1.1rem;
+        padding: 14px 36px;
+    }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eden Barel's Jungle</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <!-- Splash overlay — shown on load, dismissed on button click -->
+    <div id="splash-overlay">
+        <div id="splash-content">
+            <p class="splash-emoji">🌴</p>
+            <h1 class="splash-title">Eden's Jungle</h1>
+            <p class="splash-subtitle">Sounds of the wild await...</p>
+            <button id="enter-btn">Enter Eden's Jungle 🌴</button>
+        </div>
+    </div>
+
+    <!-- Site Header -->
+    <header id="header">
+        <div class="header-content">
+            <h1 id="site-title">🌿 Eden Barel's Jungle 🌿</h1>
+            <p class="subtitle">Click an animal or press its key to hear it!</p>
+            <button id="mute-btn">🔊 Mute Music</button>
+        </div>
+    </header>
+
+    <!-- Now Playing banner -->
+    <div id="now-playing">
+        <span id="now-playing-text">🎵 Click an animal or press a key to hear it!</span>
+    </div>
+
+    <!-- Animal Cards Grid — populated by JavaScript -->
+    <main id="animals-grid"></main>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <p>2026 Eden Barel's Jungle</p>
+    </footer>
+
+    <!-- Background music -->
+    <audio id="background-music" src="sounds/background.mp3" loop></audio>
+
+</body>
+</html>
